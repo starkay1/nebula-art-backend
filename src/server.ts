@@ -40,41 +40,54 @@ app.get('/', (req, res) => {
   });
 });
 
-// Database configuration (simplified)
-let AppDataSource: DataSource | null = null;
-
-if (process.env.DATABASE_URL) {
-  AppDataSource = new DataSource({
-    type: 'postgres',
-    url: process.env.DATABASE_URL,
-    synchronize: false, // Don't auto-sync in production
-    logging: false,
-    entities: [], // Empty for now
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+// Database status endpoint (simplified)
+app.get('/db-status', (req, res) => {
+  res.json({ 
+    status: 'database configured',
+    hasUrl: !!process.env.DATABASE_URL,
+    environment: process.env.NODE_ENV || 'development'
   });
-}
+});
 
-// Test database connection
-app.get('/db-test', async (req, res) => {
-  try {
-    if (!AppDataSource) {
-      return res.json({ status: 'no database configured' });
-    }
-    
-    if (!AppDataSource.isInitialized) {
-      await AppDataSource.initialize();
-    }
-    
-    res.json({ 
-      status: 'database connected',
-      isConnected: AppDataSource.isInitialized 
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      status: 'database error', 
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
-  }
+// Basic API endpoints for frontend compatibility
+app.post('/auth/login', (req, res) => {
+  res.status(501).json({ 
+    message: 'API endpoint not implemented yet',
+    endpoint: '/auth/login',
+    status: 'coming_soon'
+  });
+});
+
+app.post('/auth/register', (req, res) => {
+  res.status(501).json({ 
+    message: 'API endpoint not implemented yet',
+    endpoint: '/auth/register',
+    status: 'coming_soon'
+  });
+});
+
+app.get('/users/profile', (req, res) => {
+  res.status(501).json({ 
+    message: 'API endpoint not implemented yet',
+    endpoint: '/users/profile',
+    status: 'coming_soon'
+  });
+});
+
+app.get('/artworks', (req, res) => {
+  res.status(501).json({ 
+    message: 'API endpoint not implemented yet',
+    endpoint: '/artworks',
+    status: 'coming_soon'
+  });
+});
+
+app.get('/curations', (req, res) => {
+  res.status(501).json({ 
+    message: 'API endpoint not implemented yet',
+    endpoint: '/curations',
+    status: 'coming_soon'
+  });
 });
 
 // Start server
@@ -83,7 +96,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Nebula Art API server is running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/health`);
-  console.log(`🔗 Database test: http://localhost:${PORT}/db-test`);
+  console.log(`🔗 Database status: http://localhost:${PORT}/db-status`);
 });
 
 export default app;
