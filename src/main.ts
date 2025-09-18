@@ -51,16 +51,18 @@ if (process.env.NODE_ENV !== 'production') {
 // Database configuration
 const AppDataSource = new DataSource({
   type: 'postgres',
+  url: process.env.DATABASE_URL,
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'password',
   database: process.env.DB_DATABASE || 'nebula_art',
-  synchronize: process.env.NODE_ENV === 'development',
+  synchronize: process.env.NODE_ENV !== 'production', // Only sync in development
   logging: process.env.NODE_ENV === 'development',
   entities: [User, Artwork, Curation, Comment, Like, Follow],
-  migrations: ['src/migrations/**/*.ts'],
-  subscribers: ['src/subscribers/**/*.ts'],
+  migrations: ['dist/migrations/**/*.js'],
+  subscribers: ['dist/subscribers/**/*.js'],
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
 
 async function bootstrap(): Promise<void> {
