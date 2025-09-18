@@ -136,33 +136,12 @@ async function bootstrap(): Promise<void> {
     // Start server
     const PORT = process.env.PORT || 3000;
 
-    // Export for Cloudflare Workers
-    export default {
-      async fetch(request: Request, env: any, ctx: any) {
-        return new Promise((resolve) => {
-          const server = app.listen(0, () => {
-            const port = (server.address() as any)?.port;
-            const url = new URL(request.url);
-            url.port = port.toString();
-            
-            fetch(url.toString(), {
-              method: request.method,
-              headers: request.headers,
-              body: request.body
-            }).then(resolve);
-          });
-        });
-      }
-    };
-
-    // For local development
-    if (typeof addEventListener === 'undefined') {
-      app.listen(PORT, () => {
-        logger.info(`🚀 Nebula Art API server is running on port ${PORT}`);
-        logger.info(`📊 Health check: http://localhost:${PORT}/health`);
-        logger.info(`🎨 API endpoints: http://localhost:${PORT}/auth, /users, /artworks, /curations`);
-      });
-    }
+    // Start the server
+    app.listen(PORT, () => {
+      logger.info(`🚀 Nebula Art API server is running on port ${PORT}`);
+      logger.info(`📊 Health check: http://localhost:${PORT}/health`);
+      logger.info(`🎨 API endpoints: http://localhost:${PORT}/auth, /users, /artworks, /curations`);
+    });
 
   } catch (error) {
     logger.error('Failed to start server:', error);
