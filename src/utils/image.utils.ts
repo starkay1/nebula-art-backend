@@ -254,14 +254,13 @@ export class ImageUtils {
    */
   async extractDominantColors(buffer: Buffer, count: number = 5): Promise<string[]> {
     try {
-      const { dominant } = await sharp(buffer)
+      const { data } = await sharp(buffer)
         .resize(150, 150)
         .raw()
         .toBuffer({ resolveWithObject: true });
 
       // This is a simplified implementation
       // In production, you might want to use a more sophisticated color extraction library
-      const { data } = dominant;
       const colors: string[] = [];
       
       for (let i = 0; i < Math.min(count, data.length / 3); i += 3) {

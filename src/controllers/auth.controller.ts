@@ -232,17 +232,10 @@ export class AuthController {
    * Generate JWT token
    */
   private generateToken(userId: string): string {
-    const payload = {
-      userId,
-      iat: Math.floor(Date.now() / 1000),
-    };
-
     return jwt.sign(
-      payload,
+      { userId },
       process.env.JWT_SECRET || 'default-secret',
-      {
-        expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-      }
+      { expiresIn: '7d' }
     );
   }
 }

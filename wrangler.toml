@@ -1,0 +1,16 @@
+name = "nebulaart-api"
+main = "dist/main.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "nebulaart-api"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "nebulaart-app"
+database_id = "your-database-id"
+
+[vars]
+NODE_ENV = "production"
+PORT = "3000"

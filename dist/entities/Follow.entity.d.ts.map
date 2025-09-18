@@ -1,0 +1,1 @@
+{"version":3,"file":"Follow.entity.d.ts","sourceRoot":"","sources":["../../src/entities/Follow.entity.ts"],"names":[],"mappings":"AAUA,OAAO,EAAE,IAAI,EAAE,MAAM,eAAe,CAAC;AAErC,qBAGa,MAAM;IAEjB,EAAE,EAAE,MAAM,CAAC;IAIX,UAAU,EAAE,MAAM,CAAC;IAInB,WAAW,EAAE,MAAM,CAAC;IAGpB,SAAS,EAAE,IAAI,CAAC;IAKhB,QAAQ,EAAE,IAAI,CAAC;IAIf,SAAS,EAAE,IAAI,CAAC;CACjB"}

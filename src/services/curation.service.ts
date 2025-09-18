@@ -167,7 +167,7 @@ export class CurationService {
         throw new Error('One or more artworks not found or not public');
       }
 
-      updateData.artworksCount = updateData.artworkIds.length;
+      (updateData as any).artworksCount = updateData.artworkIds.length;
     }
 
     // Update curation

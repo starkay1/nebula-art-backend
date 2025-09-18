@@ -1,0 +1,1 @@
+{"version":3,"file":"register.dto.d.ts","sourceRoot":"","sources":["../../src/dto/register.dto.ts"],"names":[],"mappings":"AAWA,qBAAa,WAAW;IAKtB,IAAI,EAAE,MAAM,CAAC;IASb,QAAQ,EAAE,MAAM,CAAC;IAKjB,KAAK,EAAE,MAAM,CAAC;IASd,QAAQ,EAAE,MAAM,CAAC;IAIjB,QAAQ,CAAC,EAAE,OAAO,CAAC;IAKnB,GAAG,CAAC,EAAE,MAAM,CAAC;IAKb,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB"}
